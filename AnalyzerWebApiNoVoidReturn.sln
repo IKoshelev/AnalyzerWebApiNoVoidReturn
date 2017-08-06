@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.9
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnalyzerWebApiNoVoidReturn", "AnalyzerWebApiNoVoidReturn\AnalyzerWebApiNoVoidReturn\AnalyzerWebApiNoVoidReturn.csproj", "{D5B3A1B9-ABBA-4741-BD42-B8977DBD17BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnalyzerWebApiNoVoidReturn.Test", "AnalyzerWebApiNoVoidReturn\AnalyzerWebApiNoVoidReturn.Test\AnalyzerWebApiNoVoidReturn.Test.csproj", "{29A7A270-6E7E-43F9-AA94-03D5E04847B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnalyzerWebApiNoVoidReturn.Vsix", "AnalyzerWebApiNoVoidReturn\AnalyzerWebApiNoVoidReturn.Vsix\AnalyzerWebApiNoVoidReturn.Vsix.csproj", "{8206C55A-5B09-4BDF-BDB5-C4F994511699}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D5B3A1B9-ABBA-4741-BD42-B8977DBD17BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5B3A1B9-ABBA-4741-BD42-B8977DBD17BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5B3A1B9-ABBA-4741-BD42-B8977DBD17BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5B3A1B9-ABBA-4741-BD42-B8977DBD17BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29A7A270-6E7E-43F9-AA94-03D5E04847B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29A7A270-6E7E-43F9-AA94-03D5E04847B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29A7A270-6E7E-43F9-AA94-03D5E04847B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29A7A270-6E7E-43F9-AA94-03D5E04847B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8206C55A-5B09-4BDF-BDB5-C4F994511699}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8206C55A-5B09-4BDF-BDB5-C4F994511699}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8206C55A-5B09-4BDF-BDB5-C4F994511699}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8206C55A-5B09-4BDF-BDB5-C4F994511699}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
