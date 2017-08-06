@@ -59,7 +59,65 @@ namespace Test
         }
 
         [TestMethod]
-        public void OnClassInheritingWebWithViolationMethodGivesDiag()
+        public void WillCheckEntireInheritanceChain()
+        {
+            var test = @"
+using System;
+using System.Web.Http;
+
+namespace Test
+{
+    public class Link: ApiController
+    {
+    }
+
+    public class FooBar: Link
+    {
+        public void ViolatingMethod()
+        {
+        }
+    }
+}";
+
+            var expected = new DiagnosticResult
+            {
+                Id = "AnalyzerWebApiNoVoidReturn",
+                Message = String.Format(
+                                AnalyzerWebApiNoVoidReturnAnalyzer.MessageFormat,
+                                "FooBar",
+                                "ViolatingMethod"),
+                Severity = DiagnosticSeverity.Error,
+                Locations =
+                    new[] {
+                            new DiagnosticResultLocation("Test0.cs", 13, 21)
+                        }
+            };
+
+            VerifyCSharpDiagnostic(test, expected);
+
+            var fixtest = @"
+using System;
+using System.Web.Http;
+
+namespace Test
+{
+    public class Link: ApiController
+    {
+    }
+
+    public class FooBar: Link
+    {
+        public int ViolatingMethod()
+        {
+            return new Random().Next();
+        }
+    }
+}";
+            VerifyCSharpFix(test, fixtest);
+        }
+
+        [TestMethod]
+        public void OnClassInheritingWebApiCtrlWithViolationMethodGivesDiag()
         {
             var test = @"
 using System;
@@ -165,6 +223,74 @@ namespace Test
     }
 }";
             VerifyCSharpFix(test, fixtest);
+        }
+
+
+        [TestMethod]
+        public void WhenFixingMayAddExtraUnnededReturn()
+        {
+            var test = @"
+using System;
+using System.Web.Http;
+
+namespace Test
+{
+    public class FooBar: ApiController
+    {
+        public void ViolatingMethod(int a)
+        {
+            if(a > 0)
+            {
+                return;
+            } 
+            else 
+            {
+                return;
+            }
+        }
+    }
+}";
+
+            var expected = new DiagnosticResult
+            {
+                Id = "AnalyzerWebApiNoVoidReturn",
+                Message = String.Format(
+                                AnalyzerWebApiNoVoidReturnAnalyzer.MessageFormat,
+                                "FooBar",
+                                "ViolatingMethod"),
+                Severity = DiagnosticSeverity.Error,
+                Locations =
+                    new[] {
+                            new DiagnosticResultLocation("Test0.cs", 9, 21)
+                        }
+            };
+
+            VerifyCSharpDiagnostic(test, expected);
+
+            var fixtest = @"
+using System;
+using System.Web.Http;
+
+namespace Test
+{
+    public class FooBar: ApiController
+    {
+        public int ViolatingMethod(int a)
+        {
+            if(a > 0)
+            {
+                return new Random().Next();
+            } 
+            else 
+            {
+                return new Random().Next();
+            }
+
+            return new Random().Next();
+        }
+    }
+}";
+            VerifyCSharpFix(test, fixtest, allowNewCompilerDiagnostics: true);
         }
 
         protected override CodeFixProvider GetCSharpCodeFixProvider()
