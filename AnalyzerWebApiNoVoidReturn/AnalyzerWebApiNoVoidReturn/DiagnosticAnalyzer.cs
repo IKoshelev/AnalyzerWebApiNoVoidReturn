@@ -41,7 +41,7 @@ namespace AnalyzerWebApiNoVoidReturn
         private static void AnalyzeSymbol(SymbolAnalysisContext context)
         {
             var namedMethodSymbol = (IMethodSymbol)context.Symbol;
-
+            
             if (namedMethodSymbol.DeclaredAccessibility != Accessibility.Public)
             {
                 return;
@@ -53,6 +53,13 @@ namespace AnalyzerWebApiNoVoidReturn
             }
 
             var namedTypeSymbol = namedMethodSymbol.ContainingType;
+
+            var constructors = namedTypeSymbol.Constructors;
+
+            if (constructors.Contains(namedMethodSymbol))
+            {
+                return;
+            }
 
             var webApiControllerTypeSymbol = 
                 context.Compilation.GetTypeByMetadataName(

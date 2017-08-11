@@ -105,30 +105,11 @@ namespace AnalyzerWebApiNoVoidReturn
             var newRoot = (await document.GetSyntaxRootAsync())
                                             .ReplaceNode(oldClass, newClass);
 
-            //var newDocument = document.WithSyntaxRoot(newRoot);
-
-            //var newDocumentInfo = DocumentInfo.
-
             var newSolution = document.Project.Solution
                                     .RemoveDocument(document.Id)
                                     .AddDocument(document.Id, document.Name, newRoot);
 
-            return newSolution;
-
-            //// Compute new uppercase name.
-            //var identifierToken = methodDecl.Identifier;
-            //var newName = identifierToken.Text.ToUpperInvariant();
-
-            //// Get the symbol representing the type to be renamed.
-            //var semanticModel = await document.GetSemanticModelAsync(cancellationToken);
-            //var typeSymbol = semanticModel.GetDeclaredSymbol(methodDecl, cancellationToken);
-
-            //// Produce a new solution that has all references to that type renamed, including the declaration.
-            //var originalSolution = document.Project.Solution;
-            //var optionSet = originalSolution.Workspace.Options;
-            //var newSolution = await Renamer.RenameSymbolAsync(document.Project.Solution, typeSymbol, newName, optionSet, cancellationToken).ConfigureAwait(false);
-
-            //// Return the new solution with the now-uppercase type name.
+            return newSolution;            
         }
     }
 }

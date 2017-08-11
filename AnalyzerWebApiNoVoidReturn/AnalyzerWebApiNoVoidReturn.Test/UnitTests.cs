@@ -44,6 +44,9 @@ namespace Test
 {
     public class FooBar: ApiController
     {
+        public FooBar()
+        {
+        }
         public int Method1()
         {
             return 1;
